@@ -81,7 +81,7 @@ async function crawl() {
                         where: { repository: repo.html_url },
                         update: {
                             stars: repo.stargazers_count,
-                            lastUpdate: new Date(repo.updated_at).toISOString().split('T')[0], // YYYY-MM-DD
+                            lastUpdate: new Date(repo.updated_at),
                             downloads: 0, // GitHub API doesn't give downloads easily
                         },
                         create: {
@@ -93,8 +93,8 @@ async function crawl() {
                             version: '1.0.0',
                             stars: repo.stargazers_count,
                             downloads: 0,
-                            lastUpdate: new Date(repo.updated_at).toISOString().split('T')[0],
-                            tags: JSON.stringify(repo.topics || []),
+                            lastUpdate: new Date(repo.updated_at),
+                            tags: repo.topics || [], // Pass array directly
                             categoryId: categoryId,
                             slug: slug,
                         }

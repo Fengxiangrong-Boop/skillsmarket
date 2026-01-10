@@ -81,8 +81,8 @@ async function main() {
                 version: skill.version,
                 stars: skill.stars,
                 downloads: skill.downloads,
-                lastUpdate: skill.lastUpdate,
-                tags: JSON.stringify(skill.tags),
+                lastUpdate: new Date(skill.lastUpdate),
+                tags: skill.tags, // Pass array directly for Postgres
                 categoryId: skill.category,
                 slug: slug,
             },

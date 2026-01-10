@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Recommended for Vercel/Neon
 }
 
 model Category {
@@ -27,16 +28,15 @@ model Skill {
   description String
   repository  String   @unique
   author      String
-  version     String?
   stars       Int      @default(0)
   downloads   Int      @default(0)
-  lastUpdate  String   // Original JSON uses string date, keeping simple for now or parsing to DateTime
-  tags        String   // Storing as JSON string
+  lastUpdate  DateTime
+  tags        String[]
   
   categoryId  String
   category    Category @relation(fields: [categoryId], references: [id])
   
-  // SEO & Optimization
+  // SEO Fields
   slug        String   @unique
   
   createdAt   DateTime @default(now())

@@ -84,10 +84,8 @@ export async function getSkills({
     ]);
 
     // Parse tags from JSON string to array
-    const parsedSkills = skills.map((s: any) => ({
-        ...s,
-        tags: JSON.parse(s.tags) as string[],
-    }));
+    // Postgres returns tags as array directly, no need to parse
+    const parsedSkills = skills;
 
     return {
         skills: parsedSkills,
@@ -103,10 +101,7 @@ export async function getPopularSkills(limit = 6) {
         orderBy: { stars: 'desc' },
     });
 
-    return skills.map((s: any) => ({
-        ...s,
-        tags: JSON.parse(s.tags) as string[],
-    }));
+    return skills;
 }
 
 export async function getSkillCount() {
