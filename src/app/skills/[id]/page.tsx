@@ -185,16 +185,6 @@ await skill.execute();`}
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
-                    <Package className="w-4 h-4 text-purple-500" />
-                    <span className="font-mono text-sm">版本</span>
-                  </div>
-                  <span className="font-mono font-bold text-gray-900 dark:text-white">
-                    v{skill.version}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                     <User className="w-4 h-4 text-orange-500" />
                     <span className="font-mono text-sm">作者</span>
                   </div>
