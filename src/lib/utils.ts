@@ -18,7 +18,6 @@ export interface Skill {
   description: string;
   category: string;
   author: string;
-  version: string;
   downloads: number;
   stars: number;
   lastUpdate: string;

@@ -90,7 +90,6 @@ async function crawl() {
                             description: repo.description,
                             repository: repo.html_url,
                             author: repo.owner ? repo.owner.login : 'unknown',
-                            version: '1.0.0',
                             stars: repo.stargazers_count,
                             downloads: 0,
                             lastUpdate: new Date(repo.updated_at),

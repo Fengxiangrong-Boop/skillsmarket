@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Skill, formatNumber, formatDate, getCategoryById } from '@/lib/utils';
 import { Star, Download, Calendar, ExternalLink } from 'lucide-react';
@@ -33,9 +35,6 @@ export default function SkillCard({ skill }: SkillCardProps) {
             </Link>
           )}
         </div>
-        <span className="text-xs font-mono text-gray-500 dark:text-gray-400">
-          v{skill.version}
-        </span>
       </div>
 
       {/* Description */}

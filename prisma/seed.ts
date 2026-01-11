@@ -78,7 +78,6 @@ async function main() {
                 description: skill.description,
                 repository: skill.repository || '',
                 author: skill.author,
-                version: skill.version,
                 stars: skill.stars,
                 downloads: skill.downloads,
                 lastUpdate: new Date(skill.lastUpdate),

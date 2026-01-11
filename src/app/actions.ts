@@ -13,7 +13,7 @@ export type Skill = {
     author: string;
     stars: number;
     downloads: number;
-    lastUpdate: string;
+    lastUpdate: Date;
     tags: string[]; // Handled as array in return type
     categoryId: string;
     slug: string;
