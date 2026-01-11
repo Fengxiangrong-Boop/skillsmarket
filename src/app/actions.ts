@@ -31,18 +31,23 @@ export type Category = {
 
 // Get all categories with skill counts
 export async function getCategories(): Promise<Category[]> {
-    const categories = await prisma.category.findMany({
-        include: {
-            _count: {
-                select: { skills: true },
+    try {
+        const categories = await prisma.category.findMany({
+            include: {
+                _count: {
+                    select: { skills: true },
+                },
             },
-        },
-    });
+        });
 
-    return categories.map((c: any) => ({
-        ...c,
-        count: c._count.skills,
-    }));
+        return categories.map((c: any) => ({
+            ...c,
+            count: c._count.skills,
+        }));
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        return [];
+    }
 }
 
 // Get skills with pagination and filtering
@@ -67,43 +72,63 @@ export async function getSkills({
 
     if (query) {
         where.OR = [
-            { name: { contains: query } },
-            { description: { contains: query } },
-            { tags: { contains: query } },
+            { name: { contains: query, mode: 'insensitive' } },
+            { description: { contains: query, mode: 'insensitive' } },
+            { tags: { hasSome: [query] } },
         ];
     }
 
-    const [skills, total] = await prisma.$transaction([
-        prisma.skill.findMany({
-            where,
-            skip,
-            take: limit,
-            orderBy: { stars: 'desc' }, // Default sort by stars
-        }),
-        prisma.skill.count({ where }),
-    ]);
+    try {
+        const [skills, total] = await prisma.$transaction([
+            prisma.skill.findMany({
+                where,
+                skip,
+                take: limit,
+                orderBy: { stars: 'desc' }, // Default sort by stars
+            }),
+            prisma.skill.count({ where }),
+        ]);
 
-    // Parse tags from JSON string to array
-    // Postgres returns tags as array directly, no need to parse
-    const parsedSkills = skills;
+        // Parse tags from JSON string to array
+        // Postgres returns tags as array directly, no need to parse
+        const parsedSkills = skills;
 
-    return {
-        skills: parsedSkills,
-        total,
-        totalPages: Math.ceil(total / limit),
-        currentPage: page,
-    };
+        return {
+            skills: parsedSkills,
+            total,
+            totalPages: Math.ceil(total / limit),
+            currentPage: page,
+        };
+    } catch (error) {
+        console.error('Error fetching skills:', error);
+        return {
+            skills: [],
+            total: 0,
+            totalPages: 0,
+            currentPage: page,
+        };
+    }
 }
 
 export async function getPopularSkills(limit = 6) {
-    const skills = await prisma.skill.findMany({
-        take: limit,
-        orderBy: { stars: 'desc' },
-    });
+    try {
+        const skills = await prisma.skill.findMany({
+            take: limit,
+            orderBy: { stars: 'desc' },
+        });
 
-    return skills;
+        return skills;
+    } catch (error) {
+        console.error('Error fetching popular skills:', error);
+        return [];
+    }
 }
 
 export async function getSkillCount() {
-    return await prisma.skill.count();
+    try {
+        return await prisma.skill.count();
+    } catch (error) {
+        console.error('Error fetching skill count:', error);
+        return 0;
+    }
 }
