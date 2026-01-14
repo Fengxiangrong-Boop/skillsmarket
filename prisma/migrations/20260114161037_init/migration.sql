@@ -1,31 +1,33 @@
 -- CreateTable
 CREATE TABLE "Category" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "nameEn" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "icon" TEXT NOT NULL,
-    "color" TEXT NOT NULL
+    "color" TEXT NOT NULL,
+
+    CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Skill" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "nameEn" TEXT,
     "description" TEXT NOT NULL,
     "repository" TEXT NOT NULL,
     "author" TEXT NOT NULL,
-    "version" TEXT,
     "stars" INTEGER NOT NULL DEFAULT 0,
     "downloads" INTEGER NOT NULL DEFAULT 0,
-    "lastUpdate" TEXT NOT NULL,
-    "tags" TEXT NOT NULL,
+    "lastUpdate" TIMESTAMP(3) NOT NULL,
+    "tags" TEXT[],
     "categoryId" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
-    CONSTRAINT "Skill_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Skill_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -42,3 +44,6 @@ CREATE INDEX "Skill_description_idx" ON "Skill"("description");
 
 -- CreateIndex
 CREATE INDEX "Skill_slug_idx" ON "Skill"("slug");
+
+-- AddForeignKey
+ALTER TABLE "Skill" ADD CONSTRAINT "Skill_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

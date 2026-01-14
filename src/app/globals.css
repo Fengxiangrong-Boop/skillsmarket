@@ -1,27 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* 浅色模式 CSS 变量 */
+    --background: 248 250 252;
+    --foreground: 15 23 42;
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+    --primary: 37 99 235;
+    --primary-foreground: 255 255 255;
+    --accent: 249 115 22;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
+    --border: 226 232 240;
+    --ring: 37 99 235;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* 深色模式 CSS 变量 */
+    --background: 10 14 39;
+    --foreground: 248 250 252;
+    --card: 17 24 39;
+    --card-foreground: 248 250 252;
+    --primary: 59 130 246;
+    --primary-foreground: 255 255 255;
+    --accent: 251 146 60;
+    --muted: 30 41 59;
+    --muted-foreground: 148 163 184;
+    --border: 30 41 59;
+    --ring: 59 130 246;
   }
 }
 
 @layer base {
   * {
-    @apply border-gray-200 dark:border-gray-700;
+    @apply border-border-light dark:border-border-dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+    @apply bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100;
+    @apply font-body antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* 标题使用 Space Grotesk */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Glassmorphism 卡片 */
+  .glass-card {
+    @apply backdrop-blur-md bg-white/80 dark:bg-slate-900/80;
+    @apply border border-white/20 dark:border-slate-700/50;
+    @apply shadow-soft;
+  }
+
+  .glass-card-strong {
+    @apply backdrop-blur-xl bg-white/90 dark:bg-slate-900/90;
+    @apply border border-slate-200/50 dark:border-slate-700/50;
+    @apply shadow-soft-lg;
+  }
+
+  /* 现代卡片样式 */
+  .modern-card {
+    @apply bg-white dark:bg-slate-800/50;
+    @apply border border-slate-200 dark:border-slate-700/50;
+    @apply rounded-2xl shadow-card;
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .modern-card:hover {
+    @apply shadow-card-hover border-primary/30 dark:border-primary/30;
+    @apply -translate-y-1;
+  }
+
+  /* 渐变按钮 */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary-light;
+    @apply text-white font-semibold;
+    @apply px-6 py-3 rounded-xl;
+    @apply shadow-glow hover:shadow-lg;
+    @apply transition-all duration-300;
+    @apply hover:-translate-y-0.5;
+  }
+
+  .btn-accent {
+    @apply bg-gradient-to-r from-accent to-accent-light;
+    @apply text-white font-semibold;
+    @apply px-6 py-3 rounded-xl;
+    @apply shadow-glow-accent hover:shadow-lg;
+    @apply transition-all duration-300;
+    @apply hover:-translate-y-0.5;
+  }
+
+  /* 标签样式 */
+  .tag {
+    @apply inline-flex items-center;
+    @apply px-3 py-1 text-xs font-medium;
+    @apply rounded-full;
+    @apply bg-slate-100 dark:bg-slate-800;
+    @apply text-slate-600 dark:text-slate-400;
+    @apply border border-slate-200 dark:border-slate-700;
+    @apply transition-colors duration-200;
+  }
+
+  .tag:hover {
+    @apply bg-primary/10 dark:bg-primary/20;
+    @apply text-primary dark:text-primary-light;
+    @apply border-primary/30;
+  }
+
+  /* 发光效果 */
+  .glow-effect {
+    @apply relative;
+  }
+
+  .glow-effect::before {
+    content: '';
+    @apply absolute -inset-1 rounded-2xl opacity-0;
+    background: linear-gradient(45deg, #2563EB, #3B82F6, #60A5FA);
+    filter: blur(20px);
+    transition: opacity 0.3s;
+    z-index: -1;
+  }
+
+  .glow-effect:hover::before {
+    @apply opacity-30;
+  }
+
+  /* 终端风格代码块 */
+  .terminal-block {
+    @apply bg-slate-900 dark:bg-black;
+    @apply border border-slate-700;
+    @apply rounded-xl overflow-hidden;
+    @apply font-mono text-sm;
+  }
+
+  .terminal-header {
+    @apply flex items-center gap-2 px-4 py-3;
+    @apply bg-slate-800 dark:bg-slate-900;
+    @apply border-b border-slate-700;
+  }
+
+  .terminal-dot {
+    @apply w-3 h-3 rounded-full;
+  }
+
+  .terminal-body {
+    @apply p-4 text-slate-300;
+  }
+
+  /* Section 标题 */
+  .section-title {
+    @apply text-2xl md:text-3xl font-heading font-bold;
+    @apply text-slate-900 dark:text-white;
+    @apply flex items-center gap-3;
+  }
+
+  .section-title::before {
+    content: '$';
+    @apply text-success font-mono;
   }
 }
 
@@ -29,34 +177,63 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* 渐变文字 */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary via-primary-light to-accent;
+  }
+
+  /* 微妙的边框发光 */
+  .border-glow {
+    box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.1),
+                0 0 20px rgba(37, 99, 235, 0.1);
+  }
+
+  /* 网格背景 */
+  .bg-grid {
+    background-image: 
+      linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .dark .bg-grid {
+    background-image: 
+      linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+  }
+
+  /* 点状背景 */
+  .bg-dots {
+    background-image: radial-gradient(circle, rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .dark .bg-dots {
+    background-image: radial-gradient(circle, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  }
 }
 
-/* Custom scrollbar */
+/* 自定义滚动条 */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  @apply bg-slate-100 dark:bg-slate-900;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+  @apply hover:bg-slate-400 dark:hover:bg-slate-600;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-600;
-}
-
-/* Smooth transitions */
-* {
-  @apply transition-colors duration-200;
-}
-
-/* Focus styles */
+/* Focus 样式 */
 :focus-visible {
-  @apply outline-none ring-2 ring-primary ring-offset-2 dark:ring-offset-gray-900;
+  @apply outline-none ring-2 ring-primary ring-offset-2;
+  @apply dark:ring-offset-background-dark;
 }
 
 /* Selection */
@@ -64,25 +241,37 @@
   @apply bg-primary/20 text-primary-dark;
 }
 
-/* Code blocks */
+/* 代码块 */
 code {
-  @apply font-mono text-sm bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded;
+  @apply font-mono text-sm;
+  @apply bg-slate-100 dark:bg-slate-800;
+  @apply px-1.5 py-0.5 rounded-md;
+  @apply text-primary dark:text-primary-light;
 }
 
 pre {
-  @apply font-mono text-sm bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto;
+  @apply font-mono text-sm;
+  @apply bg-slate-900 dark:bg-black;
+  @apply p-4 rounded-xl overflow-x-auto;
+  @apply border border-slate-700;
 }
 
-/* Animation for pulse */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
+pre code {
+  @apply bg-transparent p-0 text-slate-300;
+}
+
+/* 动画：尊重用户偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+/* 平滑过渡（排除背景色以提高性能） */
+* {
+  @apply transition-[color,border-color,box-shadow,transform,opacity] duration-200;
 }

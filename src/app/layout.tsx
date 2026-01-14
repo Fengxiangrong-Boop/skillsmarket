@@ -1,18 +1,18 @@
 import type { Metadata } from 'next';
-import { JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
-});
-
 export const metadata: Metadata = {
-  title: 'Skills Marketplace - Agent技能市场',
-  description: '为Claude Code、Codex和ChatGPT提供技能扩展的开源市场平台',
-  keywords: ['skills', 'agent', 'claude', 'codex', 'chatgpt', 'marketplace'],
+  title: 'Skills Marketplace - AI Agent 技能市场',
+  description: '为 Claude Code、Codex 和 ChatGPT 提供技能扩展的开源市场平台。浏览超过 50,000+ 个精选技能。',
+  keywords: ['skills', 'agent', 'claude', 'codex', 'chatgpt', 'marketplace', 'MCP', 'AI'],
+  authors: [{ name: 'SkillsMP Team' }],
+  openGraph: {
+    title: 'Skills Marketplace - AI Agent 技能市场',
+    description: '为 Claude Code、Codex 和 ChatGPT 提供技能扩展的开源市场平台',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
@@ -22,11 +22,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={`${jetbrainsMono.variable} font-mono min-h-screen flex flex-col`}>
+      <head>
+        {/* 预加载字体以提高性能 */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
+      <body className="font-body min-h-screen flex flex-col antialiased">
+        {/* 固定导航栏 */}
         <Header />
-        <main className="flex-1">
+
+        {/* 主内容区域 */}
+        <div className="flex-1">
           {children}
-        </main>
+        </div>
+
+        {/* 页脚 */}
         <Footer />
       </body>
     </html>
