@@ -3,7 +3,7 @@ name: Daily Skills Crawler
 on:
   schedule:
     # Run at 00:00 UTC every day
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write # Needed to push changes back to repo
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,16 +19,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install Dependencies
         run: npm ci
 
       - name: Initialize Database
-        # Ensure Prisma client is generated. 
-        # We assume dev.db exists in repo. If not, this step might need to migrate.
-        # But since we are committing dev.db, it should be there.
+        # 确保生成 Prisma 客户端。
+        # 这里不进行数据库迁移，迁移应在部署阶段完成或在 crawler 脚本中处理。
         run: npx prisma generate
 
       - name: Run Crawler
@@ -37,4 +36,3 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           # DIRECT_URL: ${{ secrets.DIRECT_URL }} # Optional if using direct connection
         run: npx ts-node scripts/crawl-github.ts
-
