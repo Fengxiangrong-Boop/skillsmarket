@@ -30,7 +30,7 @@
 
 ## 🤖 GitHub 自动爬虫
 
-项目内置 GitHub Actions 定时爬虫，每天自动从 GitHub 抓取最新的 AI 技能/插件数据。
+项目内置 GitHub Actions 定时爬虫，每小时自动从 GitHub 抓取最新的 AI 技能/插件数据。
 
 ### 爬取范围
 
@@ -52,8 +52,8 @@
 
 ### 执行时间
 
-- **自动执行**: 每天 UTC 00:00（北京时间 08:00）
-- **手动触发**: Actions 页面 → Daily Skills Crawler → Run workflow
+- **自动执行**: 每小时整点执行
+- **手动触发**: Actions 页面 → Hourly Skills Crawler → Run workflow
 
 ## 🚀 快速开始
 
