@@ -35,4 +35,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           # DIRECT_URL: ${{ secrets.DIRECT_URL }} # Optional if using direct connection
-        run: npx ts-node scripts/crawl-github.ts
+        run: npx ts-node --compiler-options '{"module":"CommonJS"}' scripts/crawl-github.ts
