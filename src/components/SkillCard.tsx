@@ -12,15 +12,15 @@ export default function SkillCard({ skill }: SkillCardProps) {
   const category = getCategoryById(skill.category);
 
   return (
-    <div className="group modern-card p-6 cursor-pointer">
+    <div className="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-md transition-all duration-200 cursor-pointer">
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex items-start justify-between mb-3">
         <div className="flex-1 min-w-0">
           <Link
             href={`/skills/${skill.id}`}
-            className="block group/link"
+            className="block"
           >
-            <h3 className="text-lg font-heading font-bold text-slate-900 dark:text-white group-hover/link:text-primary dark:group-hover/link:text-primary-light transition-colors truncate">
+            <h3 className="text-lg font-heading font-semibold text-slate-900 dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors truncate">
               {skill.name}
             </h3>
           </Link>
@@ -41,7 +41,7 @@ export default function SkillCard({ skill }: SkillCardProps) {
         {/* 外部链接图标 */}
         <Link
           href={`/skills/${skill.id}`}
-          className="p-2 rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-400 hover:text-primary hover:bg-primary/10 dark:hover:bg-primary/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
+          className="p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
         >
           <ArrowUpRight className="w-4 h-4" />
         </Link>
@@ -75,7 +75,10 @@ export default function SkillCard({ skill }: SkillCardProps) {
       {/* Tags */}
       <div className="flex flex-wrap gap-2 mb-4">
         {skill.tags.slice(0, 3).map((tag) => (
-          <span key={tag} className="tag text-xs cursor-default">
+          <span
+            key={tag}
+            className="px-2.5 py-1 text-xs font-medium rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400"
+          >
             #{tag}
           </span>
         ))}
@@ -87,7 +90,7 @@ export default function SkillCard({ skill }: SkillCardProps) {
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700/50">
+      <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
         <span className="text-sm text-slate-500 dark:text-slate-400">
           by <span className="font-medium text-slate-700 dark:text-slate-300">{skill.author}</span>
         </span>
@@ -95,7 +98,7 @@ export default function SkillCard({ skill }: SkillCardProps) {
           href={skill.repository}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-dark dark:text-primary-light dark:hover:text-primary transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-dark transition-colors cursor-pointer"
           onClick={(e) => e.stopPropagation()}
         >
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">

@@ -40,10 +40,7 @@ export async function getCategories(): Promise<Category[]> {
             },
         });
 
-        return categories.map((c: any) => ({
-            ...c,
-            count: c._count.skills,
-        }));
+        return categories;
     } catch (error) {
         console.error('Error fetching categories:', error);
         return [];

@@ -103,11 +103,7 @@ export default function HomePage() {
               {!loading && searchResults.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {searchResults.map((skill, index) => (
-                    <div
-                      key={skill.id}
-                      className="animate-fade-in-up"
-                      style={{ animationDelay: `${index * 0.05}s` }}
-                    >
+                    <div key={skill.id}>
                       <SkillCard skill={skill as any} />
                     </div>
                   ))}
@@ -151,11 +147,7 @@ export default function HomePage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {categories.slice(0, 8).map((category, index) => (
-                    <div
-                      key={category.id}
-                      className="animate-fade-in-up"
-                      style={{ animationDelay: `${index * 0.05}s` }}
-                    >
+                    <div key={category.id}>
                       <CategoryCard category={category as any} />
                     </div>
                   ))}
@@ -178,11 +170,7 @@ export default function HomePage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {popularSkills.map((skill, index) => (
-                    <div
-                      key={skill.id}
-                      className="animate-fade-in-up"
-                      style={{ animationDelay: `${index * 0.05}s` }}
-                    >
+                    <div key={skill.id}>
                       <SkillCard skill={skill as any} />
                     </div>
                   ))}

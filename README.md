@@ -7,17 +7,17 @@
 - **框架**: Next.js 14 (App Router)
 - **样式**: Tailwind CSS
 - **语言**: TypeScript
+- **数据库**: PostgreSQL (Prisma ORM)
 - **图标**: Lucide React
-- **字体**: JetBrains Mono
-- **数据**: 静态JSON文件
+- **字体**: Poppins + Open Sans
 
 ## 功能特性
 
-- ✅ 终端/CLI风格的现代化UI设计
+- ✅ 简洁专业的现代化UI设计
 - ✅ 深色/浅色模式切换
 - ✅ 响应式设计（移动端、平板、桌面）
-- ✅ 10个技能分类
-- ✅ 50个示例技能数据
+- ✅ 15个技能分类
+- ✅ 108个真实GitHub技能数据
 - ✅ 实时搜索功能
 - ✅ 分类浏览系统
 - ✅ 技能详情页面
@@ -61,7 +61,32 @@ skills/
 npm install
 ```
 
-### 2. 启动开发服务器
+### 2. 配置环境变量
+
+复制 `.env.example` (如果有) 或确保 `.env` 文件包含正确的数据库连接字符串：
+
+```bash
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/skills_marketplace?schema=public"
+```
+
+### 3. 启动本地数据库 (Docker)
+
+如果你本地安装了 Docker，可以快速启动 PostgreSQL：
+
+```bash
+docker run --name skills-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=skills_marketplace -p 5432:5432 -d postgres:15
+```
+
+### 4. 初始化数据库与导入数据
+
+运行 Prisma 推送结构并导入 JSON 种子数据：
+
+```bash
+npx prisma db push
+npx prisma db seed
+```
+
+### 5. 启动开发服务器
 
 ```bash
 npm run dev

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -52,12 +52,18 @@
   }
 
   /* 标题使用 Space Grotesk */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading font-bold tracking-tight;
   }
 }
 
 @layer components {
+
   /* Glassmorphism 卡片 */
   .glass-card {
     @apply backdrop-blur-md bg-white/80 dark:bg-slate-900/80;
@@ -171,6 +177,21 @@
     content: '$';
     @apply text-success font-mono;
   }
+
+  /* 简洁的玻璃卡片 */
+  .glass-card-premium {
+    @apply backdrop-blur-md bg-white/80 dark:bg-slate-900/80;
+    @apply border border-slate-200/50 dark:border-slate-700/50;
+    @apply shadow-soft;
+    @apply rounded-2xl;
+    @apply transition-all duration-200;
+  }
+
+  .glass-card-premium:hover {
+    @apply bg-white/90 dark:bg-slate-900/90;
+    @apply shadow-soft-lg;
+    @apply border-primary/20 dark:border-primary/30;
+  }
 }
 
 @layer utilities {
@@ -187,19 +208,19 @@
   /* 微妙的边框发光 */
   .border-glow {
     box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.1),
-                0 0 20px rgba(37, 99, 235, 0.1);
+      0 0 20px rgba(37, 99, 235, 0.1);
   }
 
   /* 网格背景 */
   .bg-grid {
-    background-image: 
+    background-image:
       linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
   }
 
   .dark .bg-grid {
-    background-image: 
+    background-image:
       linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
   }
@@ -262,6 +283,7 @@ pre code {
 
 /* 动画：尊重用户偏好 */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -273,5 +295,5 @@ pre code {
 
 /* 平滑过渡（排除背景色以提高性能） */
 * {
-  @apply transition-[color,border-color,box-shadow,transform,opacity] duration-200;
+  @apply transition-colors duration-200;
 }
