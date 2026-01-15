@@ -2,6 +2,8 @@
 
 一个技能市场网站，为 AI Agent（Claude Code、Codex、ChatGPT 等）提供技能扩展。
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FFengxiangrong-Boop%2Fskillsmarket&env=DATABASE_URL&envDescription=PostgreSQL%20数据库连接字符串&envLink=https%3A%2F%2Fneon.tech&project-name=skillsmarket&repository-name=skillsmarket)
+
 ## 技术栈
 
 - **框架**: Next.js 14 (App Router)
