@@ -59,8 +59,8 @@
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/Fengxiangrong-Boop/skills-marketplace.git
-cd skills-marketplace
+git clone https://github.com/Fengxiangrong-Boop/skillsmarket.git
+cd skillsmarket
 
 # 2. 复制环境变量配置
 cp .env.example .env
@@ -107,7 +107,7 @@ npm run dev
 ## 📁 项目结构
 
 ```
-skills-marketplace/
+skillsmarket/
 ├── src/
 │   ├── app/                    # Next.js 页面
 │   ├── components/             # React 组件
@@ -156,12 +156,12 @@ docker-compose down -v
 
 ```bash
 # 构建镜像
-docker build -t skills-marketplace .
+docker build -t skillsmarket .
 
 # 运行容器
 docker run -p 3000:3000 \
   -e DATABASE_URL="postgresql://..." \
-  skills-marketplace
+  skillsmarket
 ```
 
 ---
