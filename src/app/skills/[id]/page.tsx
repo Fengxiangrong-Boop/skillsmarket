@@ -224,6 +224,7 @@ await skill.execute();`}
               <h3 className="font-bold font-mono text-gray-900 dark:text-white mb-4">
                 资源
               </h3>
+              {/* 这是注释 */}
               <a
                 href={skill.repository}
                 target="_blank"
